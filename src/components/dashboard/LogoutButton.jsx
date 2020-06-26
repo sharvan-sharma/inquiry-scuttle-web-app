@@ -25,7 +25,7 @@ function LogoutButton(props){
     return (
             <>
                 {(state.progress)?<CircularProgress/>:
-                <button className='btn btn-light rounded-pill px-3 py-1' onClick={logout}>Logout</button>}
+                <button className='btn btn-dark rounded-pill px-3 py-1' onClick={logout}>Logout</button>}
                 {(state.error.exist)?<Alert severity='error' variant='filled'>{state.error.msg}</Alert>:<></>}
             </>
     )

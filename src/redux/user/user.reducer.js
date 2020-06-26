@@ -17,7 +17,7 @@ const userReducer = (state=InitialState,action)=>{
             return ({
                 ...state,
                 email:action.payload.email,
-                name:action.payload.email,
+                name:action.payload.name,
                 photo:action.payload.photo,
                 logged_in:action.payload.logged_in
             })

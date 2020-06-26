@@ -65,7 +65,7 @@ function Signup(){
             .then( result => {
                 switch(result.data.status){
                     case 200:setstate({...state,progress:false,server:{...state.server,success:{exist:true,msg:'Verification email has been scheduled. check out your email inbox.'}}});break;
-                    case 423:setstate({...state,progress:false,server:{...state.server,error:{exist:true,msg:`Validation Error type : ${result.data.type}`}}});
+                    case 423:setstate({...state,progress:false,server:{...state.server,error:{exist:true,msg:`Validation Error type : ${result.data.type}`}}});break;
                     case 422:setstate({...state,progress:false,server:{...state.server,error:{exist:true,msg:'User with this email already exists'}}});break;
                     case 500:setstate({...state,progress:false,server:{...state.server,error:{exist:true,msg:'Something went wrong at our end!.'}}});break;
                     default:console.log('signup default exec')
@@ -160,7 +160,7 @@ function Signup(){
                     <input className='form-control' type='password' onFocus={()=>clearError('password')} onChange={validateCnfPwd} ref={cnfpass} required maxLength='25' minLength='8'  />
                     {
                         (state.cnfpassword.exist === 1)?
-                        <div className='col-12'>
+                        <div className='col-12 p-0'>
                             <Alert severity='error' className='my-3 py-0 fsm' variant='outlined'>{state.cnfpassword.msg}</Alert>
                         </div>:<></>
                     }

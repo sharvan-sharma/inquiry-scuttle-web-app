@@ -9,7 +9,7 @@ import Authenticate from './containers/Authenticate'
 import Contact from './containers/Contact'
 import Verify from './containers/Verify'
 import Page404 from './containers/Page404'
-import DashboardRouter from './containers/DashboardRouter'
+import DashboardStructure from './containers/DashboardStructure'
 import Preloader from './components/utils/Preloader'
 import ServerError from './components/utils/ServerError'
 import querystring from 'query-string'
@@ -55,7 +55,7 @@ function App(props){
     if(props.logged_in){
       return (
         <Switch>
-          <Route path='/' component={DashboardRouter} />
+          <Route path='/' component={DashboardStructure} />
           <Route component={Page404} />
         </Switch>
       )
