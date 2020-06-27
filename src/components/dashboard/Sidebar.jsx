@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import MessageIcon from '@material-ui/icons/Message';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import KeyIcon from '@material-ui/icons/VpnKey';
+import {Link} from 'react-router-dom'
 
 const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
@@ -51,9 +52,11 @@ function Sidebar(props){
                 </Tooltip>
               </li>
               <li className='d-flex justify-content-center text-muted my-2 py-2'>
-                <Tooltip title={'Projects'} placement='right' arrow>
-                    <AccountTreeIcon/>
-                </Tooltip>
+                <Link to='/projects' className='text-decoration-none '>
+                    <Tooltip title={'Projects'} placement='right' arrow>
+                        <AccountTreeIcon/>
+                    </Tooltip>
+                </Link>
               </li>
               <li className='d-flex justify-content-center text-muted my-2 py-2'>
                 <Tooltip title={'Credentials'} placement='right' arrow>

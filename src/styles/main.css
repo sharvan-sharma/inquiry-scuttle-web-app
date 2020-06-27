@@ -85,6 +85,28 @@
     background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
 }
 
+.p-main-tile{
+    background-color: white;
+    border:1px solid black;
+}
+.p-main-tile:hover{
+    background-color: rgba(245, 245, 245, 0.651);
+    cursor:pointer;
+}
+
+.pe-f{
+    font-size:'3rem'
+}
+
+.table thead th{
+    vertical-align: middle;
+    padding:0;
+}
+.table th{
+    vertical-align: middle;
+    padding:0;
+}
+
 .text-1{
     color:#212529;
 }
@@ -149,10 +171,28 @@
     display:none !important
 }
 
+.p-tile{
+    color:white;
+    background-color:black;
+    cursor:pointer;
+    transition:0.3s ease-out all;
+}
+
+.p-tile:hover{
+    color:black;
+    background-color:white ;
+    transition:0.3s ease-in all;
+    border:1px solid black;
+}
+
 @media only screen and (max-width:768px){
     /* .sidebar{
         width:15%;
     } */
+
+    .pe-f{
+    font-size:'1.5rem'
+}
 
     .pc{
         display:none !important

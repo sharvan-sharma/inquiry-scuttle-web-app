@@ -7,25 +7,47 @@ import ClearIcon from '@material-ui/icons/Clear'
 
 function InquiryTable(){
 return (<>
-<div className='d-flex align-items-center  border-bottom border-dark col-12 '>
-    <Checkbox
-        defaultChecked
-        color="default"
-        size='small'
-        inputProps={{ 'aria-label': 'checkbox with default color' }}
-    />
-    <div className='d-flex justify-content-between p-0 col-11'>
-        <div className='d-flex flex-wrap col-10 col-lg-11 col-md-11 p-0'>
-            <div className='ff-rbt fsm col-12 col-md-4 col-lg-3 bold'><b>Sharvan Sharma</b></div>
-            <div className='col-12 col-md-8 col-lg-9 d-flex flex-wrap'>
-                <span className='fsm ff-rbt'><b>This is the dummy subject</b></span>
-                <span className='fsm '>-</span>
-                <span className='fsm text-muted'>This is the dummy subject. This is the dummy subject</span>
+            <div className='table-responsive'>
+               <table className="table">
+                    {/* <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">
+                                <Checkbox size='small' />
+                            </th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Form - type</th>
+                            <th scope="col">Form - id</th>
+                            <th scope="col">Date of creation</th>
+                        </tr>
+                    </thead> */}
+                    <tbody>
+                        {/* {
+                            Object.entries(props.inquires).map(item=>{
+                                return (
+                                    <tr key={item[0]} className='border-bottom border-gray'>
+                                        <th scope="row">
+                                            <Checkbox size='small' />
+                                        </th>
+                                        <td>{item[1].name}</td>
+                                        <td>{item[1].form_type}</td>
+                                        <td>sfgdgfgsfdtr6feygfyghfgdyhgfy6yegffhgshdg</td>
+                                        <td>Jun 25</td>
+                                    </tr>
+                                )
+                            })
+                        } */}
+
+                         <tr  className='border-bottom border-gray'>
+                            <th scope="row">
+                                <Checkbox size='small' />
+                            </th>
+                            <td className='fsm ff-rbt'><b>Sharvan Sharma</b></td>
+                            <td><b>This is a dummy subject</b> - this is dummy inquiry message</td>
+                            <td>Jun 25</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div className='ff-mst fsm bold'>Jun 25</div>
-    </div>
-</div>
     <Snackbar
         anchorOrigin={{vertical:"bottom", horizontal:"center" }}
         open={true}
@@ -50,7 +72,6 @@ return (<>
                 </div>
             </div>   
     </Snackbar>
- 
 </>)
 }
 

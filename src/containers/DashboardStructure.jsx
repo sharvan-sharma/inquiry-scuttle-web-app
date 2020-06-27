@@ -8,8 +8,10 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Brand from '../components/utils/Brand'
 import Sidebar from '../components/dashboard/Sidebar'
+import ProjectTabs from '../components/dashboard/ProjectTabs'
 import InquiryTable from '../components/dashboard/InquiryTable'
 import {Switch,Route} from 'react-router-dom'
+import Project from '../components/dashboard/Project'
 
 
 const drawerWidth = 50;
@@ -133,11 +135,12 @@ function DashboardStructure(props) {
                 </nav>
                 <main className={classes.content}>
                     <div style={{marginTop:'5vh'}} />
-                        <div className='d-flex justify-content-center col-12 p-0 p-md-1 p-lg-1' >
+                    <div className='mbl' style={{marginTop:'10vh'}} />
+                    <div className='d-flex justify-content-center col-12 p-0 p-md-1 p-lg-1' >
                             <div className='col-12 p-0 bg-white rounded shadow-sm' style={{minHeight:'90vh'}}>
                                 <TabScreen screen={props.screen} />
                             </div>
-                        </div>
+                    </div>
                 </main>
             </div>
         </>
@@ -147,6 +150,17 @@ function DashboardStructure(props) {
 const TabScreen = (props)=>{
     switch(props.screen){
         case 0 : return <InquiryTable/>
+        case 1 : return <ProjectTabs/>
+        case 2 : {
+            return (
+                <Switch>
+                    <Route exact path = '/project/:project_id' component={(prop)=>{
+                        const project_id = prop.match.params.project_id
+                        return <Project project_id={project_id} />
+                    }}/>
+                </Switch>
+            )
+        }
         default : console.log('dashboard structure def exec tabscreen')
     }
 }
@@ -154,7 +168,10 @@ const TabScreen = (props)=>{
 export default function DashboardRouter(){
 return (
     <Switch>
-        <Route path='/' component={()=><DashboardStructure screen={0} />} />
+        <Route exact path ='/' component={()=><DashboardStructure screen={0} />} />
+        <Route exact path ='/projects' component={()=><DashboardStructure screen={1}/>}/>
+        <Route exact path = '/project/:project_id' component={()=><DashboardStructure screen={2}/>} />
+        <Route exact path = '/form/:project_id/:form_id' component={()=><DashboardStructure screen={3}/>} />
     </Switch>
 )
 }
