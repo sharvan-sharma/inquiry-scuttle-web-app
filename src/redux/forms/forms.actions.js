@@ -10,4 +10,9 @@ const setForms = formsArray => ({
     payload:formsArray
 })
 
-export {addForm,setForms}
+const delForm = form_id => ({
+    type:formsActionsTypes.DEL_FORM,
+    payload:form_id
+})
+
+export {addForm,setForms,delForm}

@@ -12,7 +12,8 @@ import ProjectTabs from '../components/dashboard/ProjectTabs'
 import InquiryTable from '../components/dashboard/InquiryTable'
 import {Switch,Route} from 'react-router-dom'
 import Project from '../components/dashboard/Project'
-
+import EditForm from '../components/dashboard/project/EditForm'
+import Inquiry from '../components/dashboard/Inquiry'
 
 const drawerWidth = 50;
 
@@ -118,7 +119,7 @@ function DashboardStructure(props) {
                             keepMounted: true, // Better open performance on mobile.
                             }}
                         >
-                            <MainSidebar/>
+                            <MainSidebar screen={props.screen} />
                         </Drawer>
                     </Hidden>
                     <Hidden xsDown implementation="css">
@@ -129,7 +130,7 @@ function DashboardStructure(props) {
                             variant="permanent"
                             open
                         >
-                            <MainSidebar/>
+                            <MainSidebar screen={props.screen}/>
                         </Drawer>
                     </Hidden>
                 </nav>
@@ -161,6 +162,27 @@ const TabScreen = (props)=>{
                 </Switch>
             )
         }
+        case 3:{
+            return (
+                <Switch>
+                    <Route exact path = '/form/:project_id/:form_id' component={(prop)=>{
+                        const project_id = prop.match.params.project_id
+                        const form_id = prop.match.params.form_id
+                        return <EditForm project_id={project_id} form_id={form_id} />
+                    }}/>
+                </Switch>
+            )
+        }
+        case 4 :{
+            return (
+                <Switch>
+                    <Route exact path = '/inquiry/:inquiry_id' component={(prop)=>{
+                        const inquiry_id = prop.match.params.inquiry_id
+                        return <Inquiry inquiry_id={inquiry_id} />
+                    }}/>
+                </Switch>
+            )
+        }
         default : console.log('dashboard structure def exec tabscreen')
     }
 }
@@ -172,6 +194,7 @@ return (
         <Route exact path ='/projects' component={()=><DashboardStructure screen={1}/>}/>
         <Route exact path = '/project/:project_id' component={()=><DashboardStructure screen={2}/>} />
         <Route exact path = '/form/:project_id/:form_id' component={()=><DashboardStructure screen={3}/>} />
+        <Route exact path = '/inquiry/:inquiry_id' component={()=><DashboardStructure screen={4}/>}/>
     </Switch>
 )
 }

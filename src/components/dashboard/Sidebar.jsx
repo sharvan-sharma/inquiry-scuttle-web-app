@@ -43,25 +43,25 @@ function Sidebar(props){
 
     const classes = useStyles();
 
+    let activeClass = 'text-decoration-none text-white'
+    let inactiveClass = 'text-decoration-none text-muted'
+
     return (
           <>
             <ul className='list-unstyled my-2'>
               <li className='d-flex justify-content-center my-2 py-2'>
-                <Tooltip title={'Inquires'} placement='right' arrow>
-                    <MessageIcon/>
-                </Tooltip>
+                <Link to='/' className={(props.screen === 0)?activeClass:inactiveClass}>
+                  <Tooltip title={'Inquires'} placement='right' arrow>
+                      <MessageIcon/>
+                  </Tooltip>
+                </Link>
               </li>
-              <li className='d-flex justify-content-center text-muted my-2 py-2'>
-                <Link to='/projects' className='text-decoration-none '>
+              <li className='d-flex justify-content-center my-2 py-2'>
+                <Link to='/projects' className={(props.screen === 1)?activeClass:inactiveClass}>
                     <Tooltip title={'Projects'} placement='right' arrow>
                         <AccountTreeIcon/>
                     </Tooltip>
                 </Link>
-              </li>
-              <li className='d-flex justify-content-center text-muted my-2 py-2'>
-                <Tooltip title={'Credentials'} placement='right' arrow>
-                    <KeyIcon/>
-                </Tooltip>
               </li>
             </ul>
             <ul className='list-unstyled my-2'>

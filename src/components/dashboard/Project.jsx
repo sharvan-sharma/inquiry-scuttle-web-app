@@ -4,17 +4,27 @@ import Loader from 'react-loader-spinner'
 import Alert from '@material-ui/lab/Alert'
 import axios from 'axios'
 import AddIcon from '@material-ui/icons/Add'
-import {setForms} from '../../redux/forms/forms.actions'
-import { Checkbox } from '@material-ui/core'
+import {setForms,delForm} from '../../redux/forms/forms.actions'
+import { Checkbox, CircularProgress, Tooltip } from '@material-ui/core'
+import NewForm from './project/NewForm'
+import beautifyDate from '../../utils/beautifyDate'
+import IconButton  from '@material-ui/core/IconButton'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
+import ErrorIcon from '@material-ui/icons/Error'
+import {Link} from 'react-router-dom'
 
 function Project(props){
 
     const [state,setstate] = useState({
         loading:true,
         error:{exist:false,msg:''},
-        project:{name:null}
+        project:{name:null},
+        progress:{on:false,btn:null},
+        delError:{exist:false,msg:''}
     })
 
+    const [open,setopen] = useState(false)
 
     useEffect(()=>{
         axios.post('/userapi/readall/forms',{project_id:props.project_id},{withCredentials:true})
@@ -31,6 +41,26 @@ function Project(props){
             setstate({...state,loading:false,error:{exist:true,msg:'Something went wrong while loading forms'}})
         })
     },[])
+
+
+    const deleteForm = (form_id)=>{
+        setstate({...state,progress:{on:true,btn:'del'}})
+        axios.post('/userapi/form/delete',{
+            project_id:props.project_id,
+           // form_id:form_id
+        },{withCredentials:true})
+        .then(result => {
+            switch(result.data.status){
+                case 200:props.delForm(form_id);break;
+                case 401:setstate({...state,progress:{on:false,btn:null},delError:{exist:false,msg:'Unauthorised'}});break;
+                case 500:setstate({...state,progress:{on:false,btn:null},delError:{exist:false,msg:'something went wrong'}});break;
+                case 423:setstate({...state,progress:{on:false,btn:null},delError:{exist:false,msg:`validation error type: ${result.data.type}`}});break;
+                default:console.log('def exec form del error');
+            }
+        }).catch( err =>{
+            setstate({...state,progress:{on:false,btn:null},delError:{exist:false,msg:'something went wrong'}})
+        })
+    }
 
     if(state.loading){
         return (<div className='col-12 d-flex justify-content-center align-items-center' style={{height:'50vh'}}>
@@ -53,7 +83,7 @@ function Project(props){
                         </p>
                    </div>
                    <div className='p-2 p-lg-4 p-md-3 '>
-                       <button className='btn btn-3 flg d-flex align-items-center'>
+                       <button className='btn btn-3 flg d-flex align-items-center' onClick={()=>setopen(true)}>
                             <AddIcon/>
                             <span>Add form</span>
                        </button>
@@ -70,20 +100,43 @@ function Project(props){
                             <th scope="col">Form - type</th>
                             <th scope="col">Form - id</th>
                             <th scope="col">Date of creation</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             Object.entries(props.forms).map(item=>{
                                 return (
-                                    <tr key={item[0]} className='border-bottom border-gray'>
+                                    <tr key={item[0]} className='border-bottom border-gray' >
                                         <th scope="row">
                                             <Checkbox size='small' />
                                         </th>
                                         <td>{item[1].name}</td>
                                         <td>{item[1].form_type}</td>
-                                        <td>sfgdgfgsfdtr6feygfyghfgdyhgfy6yegffhgshdg</td>
-                                        <td>Jun 25</td>
+                                        <td>{item[1].form_client_id.substring(0,50)+'..'}</td>
+                                        <td>{beautifyDate(item[1].createdAt)}</td>
+                                        <td className='d-flex align-items-center m-0'>
+                                            <Link to = {'/form/'+props.project_id+'/'+item[0]} className='text-decoration-none'>
+                                                <IconButton size='small'>
+                                                    <EditIcon fontSize='small'/>
+                                                </IconButton>
+                                            </Link>
+                                            {
+                                                (state.delError.exist)?
+                                                <Tooltip title={state.delError.msg}>
+                                                    <ErrorIcon/>
+                                                </Tooltip>:<></>
+                                            }
+                                            {
+                                                (state.progress.on && state.progress.btn === 'del')?
+                                                <div style={{width:'50px',height:'50px'}}>
+                                                    <CircularProgress/>
+                                                </div>:
+                                                <IconButton size='small' onFocus={()=>setstate({...state,delError:{exist:false,msg:''}})} onClick={()=>deleteForm(item[0])}>
+                                                    <DeleteIcon fontSize='small' />
+                                                </IconButton>         
+                                            }
+                                        </td>
                                     </tr>
                                 )
                             })
@@ -91,6 +144,9 @@ function Project(props){
                     </tbody>
                 </table>
                 </div>
+                {
+                   (open)?<NewForm open={open} setopen={setopen} project_id={props.project_id} />:<></>
+                }
             </>
         )
     }

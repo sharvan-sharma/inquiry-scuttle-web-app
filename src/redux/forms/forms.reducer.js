@@ -18,6 +18,11 @@ const fomsReducer = (state = INITIAL_STATE,action)=>{
             })
             return ({...state,forms:obj})
         }
+        case formsActionsTypes.DEL_FORM : {
+            let obj = state.forms
+            delete obj[action.payload]
+            return ({...state,forms:obj})
+        }
         default: return state
     }
 }

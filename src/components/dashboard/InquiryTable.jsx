@@ -1,12 +1,60 @@
-import React from 'react'
-import Checkbox from '@material-ui/core/Checkbox'
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Delete'
-import ClearIcon from '@material-ui/icons/Clear'
+import React,{useState,useEffect} from 'react'
+import Loader from 'react-loader-spinner'
+import Alert from '@material-ui/lab/Alert'
+import {connect} from 'react-redux'
+import {setInquiries} from '../../redux/inquires/inquires.actions'
+import axios from 'axios'
+import InquiryTile from './inquiryTable/InquiryTile'
+import BottomBar from './inquiryTable/BottomBar'
 
-function InquiryTable(){
-return (<>
+function InquiryTable(props){
+
+    const [state,setstate] = useState({
+        loading:true,
+        error:{exist:false,msg:''},
+        delArray:[]
+    })
+
+    useEffect(()=>{
+        axios.post('/userapi/read/inquires',{},{withCredentials:true})
+        .then( result => {
+            switch(result.data.status){
+                case 200 :props.setInquiries(result.data.inquiriesArray);setstate({...state,loading:false});break;
+                case 401 :setstate({...state,loading:false,error:{exist:true,msg:'Unauthorised'}});break;
+                case 423 :setstate({...state,loading:false,error:{exist:true,msg:`Validation error type: ${result.data.type}`}});break;
+                case 500 :setstate({...state,loading:false,error:{exist:true,msg:'something went wrong at our end'}});break;
+                default : console.log('default exec read all inquires')
+            }
+        }).catch( err => {
+            setstate({...state,loading:false,error:{exist:true,msg:'something went wrong at our end'}})
+        })
+    },[])
+
+
+    const remAll = ()=>setstate({...state,delArray:[]})
+
+    const addToDelArray = (id)=>{
+        let arr = state.delArray
+        arr.push(id)
+        setstate({...state,delArray:arr})
+    }
+
+    const remToDelArray = (id)=>{
+        let arr = state.delArray.filter(ele=>ele !== id)
+        setstate({...state,delArray:arr})
+    }
+
+    if(state.loading){
+        return (<div className='col-12 d-flex justify-content-center align-items-center' style={{height:'50vh'}}>
+                    <Loader type="Bars" color="black" height={50} width={50} />
+                </div>)
+    }else if(state.error.exist){
+        return (<div className='col-12 d-flex justify-content-center align-items-center' style={{height:'50vh'}}>
+                    <Alert  severity='error' variant='outlined'>{state.error.msg}</Alert>
+                </div>)
+    }else{
+        return (
+        <>
             <div className='table-responsive'>
                <table className="table">
                     {/* <thead className="thead-dark">
@@ -21,58 +69,40 @@ return (<>
                         </tr>
                     </thead> */}
                     <tbody>
-                        {/* {
-                            Object.entries(props.inquires).map(item=>{
-                                return (
-                                    <tr key={item[0]} className='border-bottom border-gray'>
-                                        <th scope="row">
-                                            <Checkbox size='small' />
-                                        </th>
-                                        <td>{item[1].name}</td>
-                                        <td>{item[1].form_type}</td>
-                                        <td>sfgdgfgsfdtr6feygfyghfgdyhgfy6yegffhgshdg</td>
-                                        <td>Jun 25</td>
-                                    </tr>
-                                )
+                        {
+                            Object.entries(props.inquiries).map(item=>{
+                                const checked = (state.delArray.includes(item[0]))?true:false
+                                return <InquiryTile 
+                                        addToDelArray={addToDelArray}
+                                        remToDelArray={remToDelArray}
+                                        key={item[0]} 
+                                        inquiry={item[1]} 
+                                        checked={checked} />
                             })
-                        } */}
-
-                         <tr  className='border-bottom border-gray'>
-                            <th scope="row">
-                                <Checkbox size='small' />
-                            </th>
-                            <td className='fsm ff-rbt'><b>Sharvan Sharma</b></td>
-                            <td><b>This is a dummy subject</b> - this is dummy inquiry message</td>
-                            <td>Jun 25</td>
-                        </tr>
+                        }
                     </tbody>
                 </table>
             </div>
-    <Snackbar
-        anchorOrigin={{vertical:"bottom", horizontal:"center" }}
-        open={true}
-    >
-         <div className='d-flex align-items-center bg-snack rounded-pill text-white'>
-                <div className='p-2'>
-                    <IconButton size='small' color='inherit'>
-                        <ClearIcon fontSize='small'/>
-                    </IconButton>
-                </div>
-                <div className='p-2 d-flex align-items-center '>
-                    <span className='p-1 fxs bg-primary rounded-pill mr-2'>20</span>
-                    <span>items selected</span>   
-                </div>
-                <div className='p-2'>
-                    <button className='btn btn-danger d-flex rounded-pill align-items-center px-3'>
-                        <div className='mr-1'>
-                            <DeleteIcon fontSize='small'/>
-                        </div>
-                        <span>Delete</span>
-                    </button>
-                </div>
-            </div>   
-    </Snackbar>
-</>)
+            {
+                (Object.entries(props.inquiries).length === 0)?
+                  <div className='col-12 p-2'>
+                      <Alert severity='info' variant='outlined'>'No Inquiry Found</Alert>
+                  </div>
+                  :
+                  <></>
+               }
+            <BottomBar delArray={state.delArray} remAll={remAll} />
+            
+        </>)
+    }
 }
 
-export default InquiryTable
+const mapStateToProps = state => ({
+    inquiries:state.inquiries.inquiries
+})
+
+const mapDispatchToProps = dispatch => ({
+    setInquiries: inquiriesArray => dispatch(setInquiries(inquiriesArray))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(InquiryTable)
