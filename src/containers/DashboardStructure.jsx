@@ -13,6 +13,7 @@ import InquiryTable from '../components/dashboard/InquiryTable'
 import {Switch,Route} from 'react-router-dom'
 import Project from '../components/dashboard/Project'
 import EditForm from '../components/dashboard/project/EditForm'
+import Navbar from '../components/dashboard/Navbar'
 import Inquiry from '../components/dashboard/Inquiry'
 
 const drawerWidth = 50;
@@ -68,7 +69,7 @@ function DashboardStructure(props) {
     )
   }
 
-  const Navbar = (props)=>{
+  const MainNavbar = (props)=>{
 
       const NavStyle = {
           zIndex:1500
@@ -92,7 +93,9 @@ function DashboardStructure(props) {
                 </IconButton>
             </div>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                
+                <div className='d-flex justify-content-end flex-wrap col-12'>
+                    <Navbar screen={props.screen}/>
+                </div>
             </div>
         </nav>
       )
@@ -101,7 +104,7 @@ function DashboardStructure(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (<>
-            <Navbar handleDrawerToggle={handleDrawerToggle} />
+            <MainNavbar screen={props.screen} handleDrawerToggle={handleDrawerToggle} />
             <div className={classes.root}>
                 <CssBaseline />
                 <nav className={classes.drawer} aria-label="mailbox folders">
