@@ -5,7 +5,7 @@ import Alert from '@material-ui/lab/Alert'
 import axios from 'axios'
 import AddIcon from '@material-ui/icons/Add'
 import {setForms,delForm} from '../../redux/forms/forms.actions'
-import { Checkbox, CircularProgress, Tooltip } from '@material-ui/core'
+import {  CircularProgress, Tooltip } from '@material-ui/core'
 import NewForm from './project/NewForm'
 import beautifyDate from '../../utils/beautifyDate'
 import IconButton  from '@material-ui/core/IconButton'
@@ -89,18 +89,15 @@ function Project(props){
                        </button>
                    </div>
                </div>
-               <div className='table-responsive'>
-               <table className="table">
+               <div className='position-absolute col-12 overflow-auto p-0  text-nowrap'>
+                <table className="table ">
                     <thead className="thead-dark">
                         <tr>
-                            <th scope="col">
-                                <Checkbox size='small' />
-                            </th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Form - type</th>
-                            <th scope="col">Form - id</th>
-                            <th scope="col">Date of creation</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col"><div className='px-2'>Name</div></th>
+                            <th scope="col"><div className='px-2'>Form - type</div></th>
+                            <th scope="col"><div className='px-2'>Form - id</div></th>
+                            <th scope="col"><div className='px-2'>Date of creation</div></th>
+                            <th scope="col"><div className='px-2'>Actions</div></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -108,13 +105,22 @@ function Project(props){
                             Object.entries(props.forms).map(item=>{
                                 return (
                                     <tr key={item[0]} className='border-bottom border-gray' >
-                                        <th scope="row">
-                                            <Checkbox size='small' />
-                                        </th>
-                                        <td>{item[1].name}</td>
-                                        <td>{item[1].form_type}</td>
-                                        <td>{item[1].form_client_id.substring(0,50)+'..'}</td>
-                                        <td>{beautifyDate(item[1].createdAt)}</td>
+                                        <td>
+                                            
+                                            <Tooltip arrow title={item[1].name}>
+                                               <div className='px-2'>{item[1].name.substring(0,20)+((item[1].name.length > 20)?'...':'')}</div>
+                                            </Tooltip>
+                                            
+                                        </td>
+                                        <td><div className='px-2'>{item[1].form_type}</div></td>
+                                        <td>
+                                            <div>
+                                            <Tooltip arrow title={item[1].form_client_id}>
+                                                <div className='px-2'>{item[1].form_client_id.substring(0,50)+((item[1].form_client_id.length > 50)?'...':'')}</div>
+                                            </Tooltip>
+                                            </div>
+                                        </td>
+                                        <td><div className='px-2'>{beautifyDate(item[1].createdAt)}</div></td>
                                         <td className='d-flex align-items-center m-0'>
                                             <Link to = {'/form/'+props.project_id+'/'+item[0]} className='text-decoration-none'>
                                                 <IconButton size='small'>

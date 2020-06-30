@@ -67,6 +67,7 @@ function Searchbar(props){
             <div className='d-flex align-items-center'>
                 <div className='d-flex align-items-center bg-white rounded text-black'>
                     <input
+                        placeholder='Search'
                         onFocus={clearError}
                         className='form-control border-0 fsm'
                         onChange = {handleSearchChange}

@@ -16,6 +16,7 @@ import EditForm from '../components/dashboard/project/EditForm'
 import Navbar from '../components/dashboard/Navbar'
 import Inquiry from '../components/dashboard/Inquiry'
 
+
 const drawerWidth = 50;
 
 const useStyles = makeStyles((theme) => ({
@@ -61,8 +62,8 @@ function DashboardStructure(props) {
   const MainSidebar = (props)=>{
     return (
     <div className='bg-1 shadow text-white '>
-        <div style={{marginTop:'5vh'}}/>
-        <div className='d-flex flex-column justify-content-between align-items-center'  style={{minHeight:'95vh'}}>
+        <div style={{marginTop:'10vh'}}/>
+        <div className='d-flex flex-column justify-content-between align-items-center'  style={{minHeight:'90vh'}}>
             <Sidebar screen={props.screen}/>
         </div>
     </div>
@@ -72,12 +73,14 @@ function DashboardStructure(props) {
   const MainNavbar = (props)=>{
 
       const NavStyle = {
-          zIndex:1500
+          zIndex:1500,
+          width:'100%',
        }
 
       return (
-        <nav className="navbar shadow navbar-expand-lg bg-black col-12 p-2 text-white position-fixed" style={NavStyle} >
-            <div className='d-flex align-items-center ' >
+        <nav className="navbar navbar-expand-lg bg-black  p-2 text-white position-fixed" style={NavStyle} >
+            
+            <div className='d-flex align-items-center' >
                 <div className='mr-2 mbl'>
                     <IconButton  color='inherit' className={classes.root} onClick={props.handleDrawerToggle}>
                         <DehazeIcon/>
@@ -93,7 +96,7 @@ function DashboardStructure(props) {
                 </IconButton>
             </div>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <div className='d-flex justify-content-end flex-wrap col-12'>
+                <div className='d-flex justify-content-end col-12'>
                     <Navbar screen={props.screen}/>
                 </div>
             </div>

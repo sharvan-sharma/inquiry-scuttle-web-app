@@ -21,9 +21,10 @@ export default function Authenticate (props) {
         <div className='bg-white full-screen col-12 col-md-6 col-lg-6 d-flex align-items-center justify-content-center shadow' style={{zIndex:1}} >
                 <TabScreen screen={props.screen} email={props.email || ''} />
         </div>
-        <div className='full-screen d-flex justify-content-end bg-pr col-12' style={{position:'fixed',top:0,left:0}}>
-            <div className='pc col-12 col-md-6 col-lg-6' >
-                
+        <div className='full-screen d-flex justify-content-end align-items-center bg-pr col-12' style={{position:'fixed',top:0,left:0}}>
+            <div className='pc col-12 col-md-6 col-lg-6 p-4' >
+                <p className='flg ff-mst text-white'>Manage all your contact pages efficiently.</p>
+                <img src='./images/illustrations/login.jpg' style={{width:'80%'}} className='rounded img-fluid'/>
             </div>
         </div>
     </>

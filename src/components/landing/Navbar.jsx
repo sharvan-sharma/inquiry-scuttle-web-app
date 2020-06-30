@@ -17,7 +17,7 @@ export default function Navbar(){
     const classes = useStyles()
 
     return (
-    <div className='d-flex flex-column align-items-center col-12 p-0' style={{position:'fixed',top:0,left:0}}>
+    <div className='d-flex flex-column align-items-center col-12 p-0' style={{position:'fixed',top:0,left:0,zIndex:200}}>
        <div className='col-12 col-lg-11 col-md-11'>
         <nav className="navbar navbar-expand-lg bg-white shadow my-2 rounded">
             <div className='fmd mx-2'>

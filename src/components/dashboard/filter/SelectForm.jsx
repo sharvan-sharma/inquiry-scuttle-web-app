@@ -8,6 +8,14 @@ import CheckBox from '@material-ui/core/Checkbox'
 
 function Forms(props){
     const [open, setopen] = useState(false);
+
+    const addDefaultValue = (id)=>{
+        if(props.formsIdArray.includes(id)){
+            return true
+        }else{
+            return false
+        }
+    }
     
     return (
         <div>
@@ -24,7 +32,7 @@ function Forms(props){
                 <ul className='list-unstyled rounded shadow m-0' >
                     {
                         props.formsArray.map(form=><li className='bg-dark text-white p-2' key={form._id}>
-                            <CheckBox size='small' onChange={(e)=>{
+                            <CheckBox size='small' defaultChecked={addDefaultValue(form._id)} onChange={(e)=>{
                                 if(e.target.checked){
                                     props.addToFormsIdArray(form._id)
                                 }else{
@@ -50,16 +58,22 @@ function SelectForm(props){
 
 return (
     <div>
-            <button onClick={()=>setopen(!open)} className='d-flex btn btn-secondary fsm align-items-center justify-content-end'>
-                <span className='mr-2'>Select Forms</span>
-                {(open)?<ExpandLess fontSize='small'/>:<ExpandMore fontSize='small'/>}
-            </button>
+        {
+            (props.formsIdArray.length === 0)?
+            <div className='bg-primary fsm text-white my-2 rounded p-1'>You haven't selected any from, select atleast one to apply filters.</div>:<></>
+        }
+         <button onClick={()=>setopen(!open)} className='d-flex btn btn-secondary fsm align-items-center justify-content-end'>
+            <span className='mr-2'>Select Forms</span>
+            {(open)?<ExpandLess fontSize='small'/>:<ExpandMore fontSize='small'/>}
+        </button>
          {
         (open)?
+        <>
         <div className='bg-dark overflow-auto' style={{position:'absolute',top:'100%',zIndex:300,maxHeight:'40vh'}}>
             <ul className='list-unstyled rounded shadow m-0' >
                 {
                     props.projects.map(project=><Forms
+                                                    formsIdArray={props.formsIdArray}
                                                     addToFormsIdArray={props.addToFormsIdArray} 
                                                     remFromFormsIdArray={props.remFromFormsIdArray} 
                                                     key={project._id} 
@@ -69,6 +83,7 @@ return (
             </ul>
         </div>
         
+        </>
         :<></>
     }
     </div>

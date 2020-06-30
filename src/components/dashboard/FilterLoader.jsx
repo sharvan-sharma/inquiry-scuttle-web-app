@@ -12,6 +12,8 @@ function FilterLoader(props){
             loading:true,
             error:{exist:false,msg:''}
         })
+
+ 
     
     useEffect(()=>{
         if(!props.fetched){
@@ -33,16 +35,16 @@ function FilterLoader(props){
     },[])
 
      if(state.loading){
-        return (<div className='col-12 d-flex rounded shadow justify-content-center align-items-center bg-white' style={{minHeight:'50vh',position:'absolute',top:'100%'}}>
+        return (<div className='d-flex justify-content-center align-items-center col-12 col-md-6 col-lg-4 rounded shadow  bg-white ' style={{height:'50vh',position:'absolute',top:'100%'}}>
                     <Loader type="Bars" color="black" height={50} width={50} />
                 </div>)
     }else if(state.error.exist){
-        return (<div className='col-12 d-flex  rounded shadow justify-content-center align-items-center  bg-white' style={{minHeight:'50vh',position:'absolute',top:'100%'}}>
+        return (<div className='d-flex justify-content-center align-items-center col-12 col-md-6 col-lg-4 d-flex  rounded shadow   bg-white ' style={{height:'50vh',position:'absolute',top:'100%'}}>
                     <Alert  severity='error' variant='outlined'>{state.error.msg}</Alert>
                 </div>)
     }else{
-        return (<div className=' col-12 d-flex  rounded shadow justify-content-center align-items-center bg-white' style={{minHeight:'50vh',position:'absolute',top:'100%'}}>
-                    <Filters setopen={props.setopen}/>
+        return (<div className='d-flex justify-content-center align-items-center col-12 col-md-6 col-lg-4  d-flex  rounded shadow  bg-white ' style={{height:'50vh',overflowY:'auto',position:'absolute',top:'100%'}}>
+                    <Filters applied={props.applied} handleFilterUpdate={props.handleFilterUpdate} filter={props.filter}/>
                 </div>)
     }
 

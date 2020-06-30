@@ -7,6 +7,7 @@ import {setProjects} from '../../redux/projects/projects.actions'
 import Alert from '@material-ui/lab/Alert'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import Tooltip from '@material-ui/core/Tooltip'
 
 function ProjectTabs(props){
 
@@ -42,10 +43,9 @@ function ProjectTabs(props){
                 </div>)
     }else{
         return (
-                <>
-                <div className='ff-rbt fmd m-4 '>
-                    <p className='px-4 fxl ff-mst text-pr'>Your Inquiry Scuttle Projects</p> 
-                </div>
+             <div className='col-12 p-0 d-flex justify-content-center'>
+              <div className='col-12 col-md-10 col-lg-8 p-0'>
+                <p className='p-4 fxl ff-mst text-center text-pr border-bottom border-gray'>Your Inquiry Scuttle Projects</p> 
                 <div className='col-12 p-0 d-flex flex-wrap'>
                     <div className='col-12 col-md-6 col-lg-4 p-4' >
                         <div className='rounded shadow-sm p-main-tile p-4 d-flex flex-column justify-content-center align-items-center' style={{minHeight:'20vh'}} onClick={()=>setopen(true)}>
@@ -60,7 +60,9 @@ function ProjectTabs(props){
                                     <div className='col-12 col-md-6 col-lg-4 p-4' key={item[0]}>
                                         <Link to={'/project/'+item[0]} className='text-decoration-none'>
                                             <div className='rounded shadow-sm p-tile p-4' style={{minHeight:'20vh'}}>
-                                                <p className='fmd ff-mst'>{item[1].name}</p>
+                                                <Tooltip arrow title={item[1].name}>
+                                                    <p className='fmd ff-mst'>{item[1].name.substring(0,20)+((item[1].name.length > 20)?'...':'')}</p>
+                                                </Tooltip>
                                             </div>
                                         </Link>
                                     </div>
@@ -71,7 +73,8 @@ function ProjectTabs(props){
                 {
                     (open)?<ProjectEditor open={open} setopen={setopen} />:<></>
                 }
-            </>
+                </div>
+            </div>
         )
     }
 }

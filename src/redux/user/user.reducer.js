@@ -9,6 +9,7 @@ const InitialState = {
     },
     logged_in:false,
     photo:null,
+    createdAt:null
 }
 
 const userReducer = (state=InitialState,action)=>{
@@ -19,7 +20,8 @@ const userReducer = (state=InitialState,action)=>{
                 email:action.payload.email,
                 name:action.payload.name,
                 photo:action.payload.photo,
-                logged_in:action.payload.logged_in
+                logged_in:action.payload.logged_in,
+                createdAt:action.payload.createdAt
             })
         }
         default : return state

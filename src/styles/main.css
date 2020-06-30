@@ -177,17 +177,18 @@
 }
 
 .p-tile{
+    
     color:white;
-    background-color:black;
-    cursor:pointer;
-    transition:0.3s ease-out all;
+    background-color: #212529;
+    transition:0.2s ease-in all;
+    
 }
 
 .p-tile:hover{
-    color:black;
-    background-color:white ;
-    transition:0.3s ease-in all;
-    border:1px solid black;
+    color:white;
+    background-color:black;
+    cursor:pointer;
+    transition:0.2s ease-out all;
 }
 
 @media only screen and (max-width:768px){

@@ -55,20 +55,7 @@ function InquiryTable(props){
     }else{
         return (
         <>
-            <div className='table-responsive'>
-               <table className="table">
-                    {/* <thead className="thead-dark">
-                        <tr>
-                            <th scope="col">
-                                <Checkbox size='small' />
-                            </th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Form - type</th>
-                            <th scope="col">Form - id</th>
-                            <th scope="col">Date of creation</th>
-                        </tr>
-                    </thead> */}
-                    <tbody>
+            <div className='col-12 p-0'>
                         {
                             Object.entries(props.inquiries).map(item=>{
                                 const checked = (state.delArray.includes(item[0]))?true:false
@@ -80,8 +67,6 @@ function InquiryTable(props){
                                         checked={checked} />
                             })
                         }
-                    </tbody>
-                </table>
             </div>
             {
                 (Object.entries(props.inquiries).length === 0)?

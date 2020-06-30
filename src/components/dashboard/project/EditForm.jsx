@@ -196,7 +196,10 @@ function EditForm(props){
                         </div>
                         :
                         <div className='d-flex justify-content-between flex-wrap'>
-                            <p className='m-0 ff-rbt fxl'>{state.form.name}</p>
+                            <Tooltip arrow title={state.form.name}>
+                                <p className='m-0 ff-rbt fxl'>{state.form.name.substring(0,20)+((state.form.name.length > 20)?'..':'')}</p>
+                            </Tooltip>
+                            
                             <div>
                             <IconButton size='small' onClick={()=>setstate({...state,name:{edit:true}})}>
                                 <EditIcon fontSize='small'/>
