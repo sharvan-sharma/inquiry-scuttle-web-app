@@ -1,31 +1,30 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 export default function MidArea(){
     return (
-        <div className='col-12 p-0 d-flex justify-content-center align-items-center' style={{minHeight:'60vh'}}>
-            <div>
-             <div style={{marginTop:'15vh'}}/>
-             <div className='col-12 d-flex p-0' >
+        <div className='col-12 p-0' >
+            <div style={{marginTop:'15vh'}}/>
+            <div className='col-12 d-flex flex-wrap-reverse p-0' >
                 <div className='col-12 col-md-6 col-lg-4 p-0'>
                     <div className='py-4'>
                         <p className='fxl text-white ff-mst'>Inquiry Management Service</p>
                         <p className='text-white'>
                             Service to handle the inquiries from inquiry forms on your Application.
                         </p>
-                        <button className='btn btn-light rounded '>
+                        <Link to='/login' className='text-decoration-none btn btn-light rounded '>
                             Let' Get Started
-                        </button>
+                        </Link>
                     </div>
                 </div>
-                <div className='col-12 col-md-6 col-lg-8 pc d-flex justify-content-end'>
-                    <div className='col-12 col-md-10 col-lg-8'>
-                        <img src='./images/dashboard.jpg' className='img-fluid rounded shadow-lg'/>
+                <div className='col-12 col-md-6 col-lg-8 d-flex justify-content-end p-0'>
+                    <div className='col-12 col-md-10 col-lg-8 p-0'>
+                        <img src='./images/dashboard2.jpg' className='img-fluid rounded shadow-lg'/>
                     </div>
-                    
                 </div>
             </div>
             <div style={{marginTop:'10vh'}} />
-            <div className='d-flex flex-wrap col-12 p-0 rounded shadow bg-white' style={{minHeight:'20vh'}}>
+            <div className='d-flex flex-wrap col-12 p-4 rounded shadow bg-white'>
                 <div className='col-12 col-md-6 col-lg-4 p-4'>
                     <p className='text-center fmd ff-mst'><b>Create project</b></p>
                     <p className='fsm ff-rbt text-center'>
@@ -45,7 +44,7 @@ export default function MidArea(){
                     </p>
                 </div>
             </div>
-            </div>
+            <div style={{marginBottom:'10vh'}} />
         </div>
        
     )

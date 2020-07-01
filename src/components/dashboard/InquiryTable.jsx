@@ -55,7 +55,7 @@ function InquiryTable(props){
     }else{
         return (
         <>
-            <div className='col-12 p-0'>
+            <div className='col-12 p-0' style={{position:'absolute'}}>
                         {
                             Object.entries(props.inquiries).map(item=>{
                                 const checked = (state.delArray.includes(item[0]))?true:false

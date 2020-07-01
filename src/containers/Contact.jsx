@@ -41,7 +41,7 @@ export default function Contact () {
         }else{
         setstate({...state,progress:true})
         const data = {
-                form_client_id:'5ef0acb902629f2c4864eab9-5ef1daabbe481e2c90811e56-1593326725265-inquiry-scuttle-form',
+                form_client_id:'5efc6a98b3b91100048c09bf-5efc6b15b3b91100048c09c0-1593600835971-inquiry-scuttle-form',
                 inquiry:{
                     name:{
                         firstname:state.name.split(' ')[0],
@@ -52,7 +52,7 @@ export default function Contact () {
                     message:state.msg.val
                 }
             }
-        axios.post('http://localhost:5000/clientapi/create/inquiry?form_type=csa',data)
+        axios.post('https://inquiry-scuttle.herokuapp.com/clientapi/create/inquiry?form_type=csa',data)
         .then(result =>{
                 switch(result.data.status){
                     case 200:{

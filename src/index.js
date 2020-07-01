@@ -8,7 +8,8 @@ import history from './history'
 import ErrorBoundary from './ErrorBoundary'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:5000'
+// axios.defaults.baseURL = 'http://localhost:5000'
+axios.defaults.baseURL = 'https://inquiry-scuttle.herokuapp.com'
 
 ReactDOM.render(
   <Provider store={store}>

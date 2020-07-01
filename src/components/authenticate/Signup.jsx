@@ -180,7 +180,7 @@ function Signup(){
                     </button>
                 }
                 <span className='fsm text-muted mr-3'>or</span>
-                <a href='http://localhost:5000/auth/google'>
+                <a href='https://inquiry-scuttle.herokuapp.com/auth/google'>
                     <img src='./images/tech_png/google.png' className='rounded-circle img-fluid' style={{width:'24px'}}/>
                 </a>
             </div>

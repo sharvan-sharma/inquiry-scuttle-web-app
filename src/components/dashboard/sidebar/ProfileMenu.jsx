@@ -25,9 +25,17 @@ export default function ProfileMenu() {
     setAnchorEl(null);
   };
 
+  const handleIconChange = (event)=>{
+    if(anchorEl !== null){
+      setAnchorEl(null);
+    }else{
+      setAnchorEl(event.currentTarget);
+    }
+  }
+
   return (
     <div>
-        <IconButton color='inherit' size='small' onClick={handleClick} className={classes.root}>
+        <IconButton color='inherit' size='small' onClick={handleIconChange} className={classes.root}>
                 <SettingsIcon />
         </IconButton>
         <Menu
@@ -40,7 +48,7 @@ export default function ProfileMenu() {
             <MenuItem onClick={handleClose}>
               <div className='text-center col-12 p-0'>Profile</div>
             </MenuItem>
-            <MenuItem onClick={handleClose}><LogoutButton/></MenuItem>
+            <MenuItem><LogoutButton/></MenuItem>
         </Menu>
     </div>
   );

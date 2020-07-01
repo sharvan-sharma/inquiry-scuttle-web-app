@@ -9,7 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 
 function InquiryTile(props){
 return (
-    <div  className='border-bottom border-gray d-flex flex-wrap'>
+    <div  className='border-bottom border-gray d-flex flex-wrap' >
         <div className='col-1 p-0'>
                  <Checkbox
                     size='small'
@@ -23,16 +23,15 @@ return (
                     }}
               />
         </div>
-        <div className='d-flex flex-wrap col-11 px-4 py-2 p-lg-0 p-md-0 overflow-auto'>
-            <div className ='d-flex col-12 col-lg-9 col-md-8 p-0 flex-wrap'>
-                <div className='ff-rbt col-12 col-lg-3 col-md-4 p-0 d-flex align-items-center overflow-hidden text-nowrap '>
-                    <b>{props.inquiry.name.firstname.substring(0,15)+(props.inquiry.name.lastname)}</b>
-                </div>
-                <div className='fsm ff-rbt col-12 col-lg-9 col-md-8 p-0 overflow-hidden text-nowrap d-flex align-items-center'>
-                    <b>{props.inquiry.subject}</b> - {props.inquiry.message}
-                </div>
+        <div className='d-flex flex-wrap col-11 px-4 py-2 p-lg-0 p-md-0 align-items-center'>
+            <div className='ff-rbt col-12 col-lg-2 col-md-3 p-0 overflow-hidden text-nowrap '>
+                <b>{props.inquiry.name.firstname.substring(0,15)+(props.inquiry.name.lastname)}</b>
             </div>
-            <div className='d-flex align-items-center p-2 justify-content-end  col-12 col-md-4 col-lg-3'>
+            <div className='fsm ff-rbt col-12 col-lg-8 col-md-5 p-0 ovf' >
+                <b>{props.inquiry.subject}</b>
+                <span className='ovf' style={{width:'100vw'}}> - {props.inquiry.message}</span>
+            </div>
+            <div className='d-flex align-items-center p-2 justify-content-end  col-12 col-md-4 col-lg-2'>
                 <div className='fsm'>{beautifyDate(props.inquiry.createdAt)}</div>
                 {
                     (props.inquiry.read)?
