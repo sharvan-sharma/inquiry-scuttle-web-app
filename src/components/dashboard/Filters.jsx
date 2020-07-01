@@ -95,7 +95,7 @@ function Filters(props){
     }
 
     const remFromFormsIdArray = (id)=>{
-        let arr = state.formsIdArray.filter(ele => ele != id )
+        let arr = state.formsIdArray.filter(ele => ele !== id )
         setstate({...state,formsIdArray:arr})
     }
 

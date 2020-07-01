@@ -26,7 +26,7 @@ export default function MidArea(){
             <div style={{marginTop:'10vh'}} />
             <div className='d-flex flex-wrap col-12 p-4 rounded shadow bg-white'>
                 <div className='col-12 col-md-6 col-lg-4 p-4'>
-                    <p className='text-center fmd ff-mst'><b>Create project</b></p>
+                    <p className='text-center fmd ff-mst'><b>Create Projects</b></p>
                     <p className='fsm ff-rbt text-center'>
                         Create your application as project or create multiple projects for your application.
                     </p>
