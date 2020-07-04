@@ -16,6 +16,7 @@ function DeleteInquiry(props){
     })
 
     const deleteInquiry = ()=>{
+        setstate({...state,progress:true})
         axios.post('/userapi/delete/inquiry',{inquiry_id:props.inquiry_id},{withCredentials:true})
         .then(result=>{
             switch(result.data.status){
@@ -42,9 +43,7 @@ function DeleteInquiry(props){
             }
             {
                 (state.progress)?
-                <div style={{width:'50px'}} >
-                    <CircularProgress/>
-                </div>:
+                <CircularProgress size={20}/>:
                 <div>
                     <Tooltip arrow title='delete'>
                          <IconButton 
