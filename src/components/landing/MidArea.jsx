@@ -38,9 +38,9 @@ export default function MidArea(){
                     </p>
                 </div>
                 <div className='col-12 col-md-6 col-lg-4 p-4'>
-                    <p className='text-center fmd ff-mst'><b>Manage Inquires</b></p>
+                    <p className='text-center fmd ff-mst'><b>Manage Inquiries</b></p>
                     <p className='fsm ff-rbt text-center'>
-                        Read Inquiries specific to each form and directly reply from the application.
+                        Read inquiries specific to each form and directly reply from the application.
                     </p>
                 </div>
             </div>
