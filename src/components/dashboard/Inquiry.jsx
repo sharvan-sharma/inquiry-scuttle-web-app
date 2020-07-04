@@ -50,7 +50,7 @@ function Inquiry(props){
                             <ArrowBackIcon fontSize='small' />
                         </IconButton>
                 </Link>
-                <DeleteInquiry inquiry_id={props.inquiry_id} /> 
+                <DeleteInquiry type='inquiry' inquiry_id={props.inquiry_id} /> 
                 {
                     (state.inquiry.replied)?<label className='m-0 fsm btn btn-info ff-mst'>Already Replied!</label>:<></>
                 }

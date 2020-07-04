@@ -17,19 +17,19 @@ const inquiriesReducer = (state = INITIAL_STATE,action)=>{
         case inquiriesActionType.ADD_INQUIRY : {
             let obj = state.inquiries
             obj[action.payload._id] = action.payload
-            return ({...state,inquiries:obj})
+            return ({...state,inquiries:{...obj}})
         }
         case inquiriesActionType.DEL_INQUIRY:{
             let obj = state.inquiries
             delete obj[action.payload]
-            return ({...state,inquiries:obj})
+            return ({...state,inquiries:{...obj}})
         }
         case inquiriesActionType.DEL_MUL_INQUIRIES:{
             let obj = state.inquiries
             action.payload.forEach(id=>{
                delete  obj[id]
             })
-            return ({...state,inquiries:obj})
+            return ({...state,inquiries:{...obj}})
         }
         default : return state
     }

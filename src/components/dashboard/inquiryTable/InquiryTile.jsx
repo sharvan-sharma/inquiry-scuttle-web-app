@@ -43,7 +43,7 @@ return (
                         <MailIcon fontSize='small'  className='text-muted mx-1'/>
                     </Tooltip>
                 }
-                <DeleteInquiry inquiry_id={props.inquiry._id}/>
+                <DeleteInquiry type='tile' inquiry_id={props.inquiry._id}/>
                 <Link to={'/inquiry/'+props.inquiry._id} className='fxs text-decoration-none btn btn-3'  >
                     open
                 </Link>

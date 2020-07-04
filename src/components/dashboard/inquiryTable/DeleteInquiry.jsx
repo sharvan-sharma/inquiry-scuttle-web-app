@@ -7,6 +7,7 @@ import {delInquiry} from '../../../redux/inquires/inquires.actions'
 import { CircularProgress } from '@material-ui/core'
 import {connect} from 'react-redux'
 import Tooltip from '@material-ui/core/Tooltip'
+import history from '../../../history.js'
 
 function DeleteInquiry(props){
 
@@ -20,7 +21,13 @@ function DeleteInquiry(props){
         axios.post('/userapi/delete/inquiry',{inquiry_id:props.inquiry_id},{withCredentials:true})
         .then(result=>{
             switch(result.data.status){
-                case 200:props.delInquiry(result.data.inquiry_id);setstate({...state,progress:false});break;
+                case 200:{
+                    props.delInquiry(result.data.inquiry_id)
+                    if(props.type !== 'tile'){
+                        history.push('/')
+                    }
+                    break;
+                }
                 case 401:setstate({...state,progress:false,error:{exist:true,msg:'Unauthorised'}});break;
                 case 500:setstate({...state,progress:false,error:{exist:true,msg:'Something went wrong while deleting Inquiry'}});break;
                 case 423:setstate({...state,progress:false,error:{exist:true,msg:'Invalid Inquiry ID'}});break;
