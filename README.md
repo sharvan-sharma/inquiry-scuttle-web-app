@@ -1,2 +1,3 @@
 **Inquiry Scuttle Web Application**
-test
+
+It is an inquiry management dashboard developed in React.
